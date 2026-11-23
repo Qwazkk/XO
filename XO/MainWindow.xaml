@@ -1,0 +1,45 @@
+﻿<Window x:Class="XO.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Лобби" Height="600" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Column="0" Margin="10" Background="#F5F5F5">
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock Text="Ваш профиль" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                <Border BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0,0,0,20" Background="White">
+                    <StackPanel>
+                        <TextBlock x:Name="LobbyProfileName" Text="Имя: Загрузка..." FontWeight="Bold"/>
+                        <TextBlock x:Name="LobbyProfileStats" Text="Побед: 0 | Поражений: 0"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="Создать комнату:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <ComboBox x:Name="ModeBox" SelectedIndex="0" Margin="0,0,0,10">
+                    <ComboBoxItem Content="Классика (3x3)"/>
+                    <ComboBoxItem Content="Расширенный (25x25)"/>
+                </ComboBox>
+                <Button Content="Создать" Click="OnCreateRoom" Padding="10" Background="#4CAF50" Foreground="White" FontWeight="Bold"/>
+                <Button x:Name="CancelBtn" Content="Отмена" Click="OnLeaveRoom" Padding="10" Background="#f44336" Foreground="White" FontWeight="Bold" Margin="0,5,0,0" Visibility="Collapsed"/>
+            </StackPanel>
+        </DockPanel>
+
+        <Grid Grid.Column="1" Margin="10">
+            <DockPanel x:Name="RoomListPanel">
+                <TextBlock Text="Активные комнаты (двойной клик):" FontWeight="Bold" FontSize="16" DockPanel.Dock="Top" Margin="0,0,0,10"/>
+                <Button Content="Обновить" Click="OnRefreshRooms" DockPanel.Dock="Bottom" Padding="10" Margin="0,10,0,0" Background="#2196F3" Foreground="White" FontWeight="Bold"/>
+                <ListBox x:Name="RoomsList" DisplayMemberPath="DisplayText" MouseDoubleClick="OnRoomDoubleClick" FontSize="14"/>
+            </DockPanel>
+
+            <StackPanel x:Name="CountdownPanel" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Игра начнется через" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="CountdownText" Text="5" FontSize="100" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#4CAF50"/>
+                <TextBlock Text="секунд" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
